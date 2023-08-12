@@ -1,0 +1,8 @@
+requests
+twitchio
+datetime
+pytz
+cloudscraper 
+selenium 
+python-dotenv 
+wget

@@ -4,8 +4,6 @@ import json
 from twitchio.ext import commands
 from datetime import datetime
 import pytz
-from geopy.geocoders import Nominatim
-from timezonefinder import TimezoneFinder
 import cloudscraper 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -133,6 +131,8 @@ async def update(ctx):
     cookies = scraper.get(url).cookies.get_dict()
 
     options = Options()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage') 
     options.headless = True  # This runs Chrome in headless mode, remove this line if you want to see the browser in action
     browser = webdriver.Chrome(options=options)
 
@@ -161,12 +161,12 @@ async def update(ctx):
 
     space = imgur_to_end.find(" ")
 
-    response = requests.get(f'https://i.imgur.com/{html[imgur+10:imgur+10+space]}')
-    if response.status_code != 200:
-        await ctx.send('Błąd aktualizacji wyników. Spróbuj jeszcze raz.')
-        return
+    # response = requests.get(f'https://i.imgur.com/{html[imgur+10:imgur+10+space]}')
+    # if response.status_code not in [200, 429]:
+    #     await ctx.send('Błąd aktualizacji wyników. Spróbuj jeszcze raz.')
+    #     return
 
-    f = open("wynik.txt", "a")
+    f = open("wynik.txt", "w")
     f.write(f'https://i.imgur.com/{html[imgur+10:imgur+10+space]}')
     f.close()
     await ctx.send(f'Wyniki losowania zaktualizowane. Nowe wyniki: https://i.imgur.com/{html[imgur+10:imgur+10+space]}')
