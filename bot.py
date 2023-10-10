@@ -17,7 +17,7 @@ bot = commands.Bot(
     client_id=os.environ['CLIENT_ID'],
     nick=os.environ['BOT_NICK'],
     prefix=os.environ['BOT_PREFIX'],
-    initial_channels=[os.environ['CHANNEL1'], os.environ['CHANNEL2']]
+    initial_channels=[os.environ['CHANNEL1']]
 )
 
 
@@ -170,6 +170,15 @@ async def update(ctx):
     f.write(f'https://i.imgur.com/{html[imgur+10:imgur+10+space]}')
     f.close()
     await ctx.send(f'Wyniki losowania zaktualizowane. Nowe wyniki: https://i.imgur.com/{html[imgur+10:imgur+10+space]}')
+
+
+@bot.command(name='fast_update')
+async def fast_update(ctx, imgur):
+    if ctx.author.name.lower() in ("scorp1onn", "iksdaks_"):
+        f = open("wynik.txt", "w")
+        f.write(f'{imgur}')
+        f.close()
+        await ctx.send(f'Wyniki losowania zaktualizowane. Nowe wyniki: {imgur}')
 
 @bot.command(name='wyniki')
 async def wyniki(ctx):
