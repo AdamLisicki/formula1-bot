@@ -47,6 +47,16 @@ async def add_mod(ctx, new_mod):
     if ctx.author.name.lower() == "scorp1onn":
         add_mods(new_mod)
         await ctx.send(f'Użytkownik {new_mod} został modem bota b_bukas.')
+
+@bot.command(name='timeout')
+async def timeout(ctx, user):
+    if ctx.author.name.lower() == "scorp1onn":
+        await ctx.send(f'!timeout {user}')
+
+@bot.command(name='timeout5')
+async def timeout5(ctx, user):
+    if ctx.author.name.lower() == "scorp1onn":
+        await ctx.send(f'!timeout5 {user}')
 # @bot.event
 # async def event_ready():
 #     'Called once when the bot goes online.'
